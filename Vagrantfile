@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell, :inline => "sudo apt-get update -y"
 
-  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp -y"
+  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp daemon -y"
 
   config.vm.provision :shell, :inline => "sudo service ntp restart"
 
@@ -42,7 +42,11 @@ Vagrant.configure(2) do |config|
 
    config.vm.define :jenkins_master do |vm_config|
     vm_config.vm.hostname = "jenkins-master.capgemini.com"
-    # vm_config.vm.network "forwarded_port", guest: 8140, host: 8140
+    vm_config.vm.network "forwarded_port", guest: 8080, host: 8080
+   end
+
+   config.vm.define :jenkins_slave_01 do |vm_config|
+    vm_config.vm.hostname = "jenkins-slave.capgemini.com"
    end
 
 end
