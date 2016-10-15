@@ -21,6 +21,8 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell, :inline => "sudo service ntp restart"
 
+  config.vm.provision :shell, :path => "./install_java8.sh"
+
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", 1024] 
     # vb.gui = true
