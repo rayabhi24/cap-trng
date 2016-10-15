@@ -41,12 +41,19 @@ Vagrant.configure(2) do |config|
    # end
 
    config.vm.define :jenkins_master do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.2"
     vm_config.vm.hostname = "jenkins-master.capgemini.com"
     vm_config.vm.network "forwarded_port", guest: 8080, host: 8080
    end
 
    config.vm.define :jenkins_slave_01 do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.3"
     vm_config.vm.hostname = "jenkins-slave.capgemini.com"
    end
+
+   # add slave via launch command on slave
+   # Step1: obtain slave jar: http://your-Jenkins-server:port/jnlpJars/slave.jar 
+   # Step2: java -jar slave.jar -jnlpUrl http://Your-Jenkins-Server:port/computer/slave-name/slave-agent.jnlp
+
 
 end
