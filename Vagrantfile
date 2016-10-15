@@ -13,6 +13,12 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
 
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http     = "http://172.21.4.10:3128/"
+    config.proxy.https    = "http://172.21.4.10:3128/"
+    config.proxy.no_proxy = "localhost,127.0.0.1"
+  end
+
   config.vm.box = "chef_dev"
 
   config.vm.provision :shell, :inline => "sudo apt-get update -y"
