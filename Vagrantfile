@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :shell, :inline => "sudo apt-get update -y"
 
-  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp git daemon -y"
+  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp git daemon maven -y"
 
   config.vm.provision :shell, :inline => "sudo service ntp restart"
 
