@@ -57,5 +57,8 @@ Vagrant.configure(2) do |config|
    # Step1: obtain slave jar: http://your-Jenkins-server:port/jnlpJars/slave.jar 
    # Step2: java -jar slave.jar -jnlpUrl http://Your-Jenkins-Server:port/computer/slave-name/slave-agent.jnlp
 
-
+   # Build maven app
+   # Repository: https://github.com/mohitsethi/maven-sample-app
+   # Build Steps
+   # - $ mvn clean install
 end
