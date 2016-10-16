@@ -13,17 +13,17 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
 
-  if Vagrant.has_plugin?("vagrant-proxyconf")
-    config.proxy.http     = "http://172.21.4.10:3128/"
-    config.proxy.https    = "http://172.21.4.10:3128/"
-    config.proxy.no_proxy = "localhost,127.0.0.1"
-  end
+  # if Vagrant.has_plugin?("vagrant-proxyconf")
+  #   config.proxy.http     = "http://172.21.4.10:3128/"
+  #   config.proxy.https    = "http://172.21.4.10:3128/"
+  #   config.proxy.no_proxy = "localhost,127.0.0.1"
+  # end
 
   config.vm.box = "chef_dev"
 
   config.vm.provision :shell, :inline => "sudo apt-get update -y"
 
-  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp daemon -y"
+  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp git daemon -y"
 
   config.vm.provision :shell, :inline => "sudo service ntp restart"
 
@@ -61,4 +61,8 @@ Vagrant.configure(2) do |config|
    # Repository: https://github.com/mohitsethi/maven-sample-app
    # Build Steps
    # - $ mvn clean install
+
+   # Jenkins dsl
+   # Plugin Home: https://wiki.jenkins-ci.org/display/JENKINS/Job+DSL+Plugin
+   # 
 end
