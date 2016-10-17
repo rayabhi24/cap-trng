@@ -53,6 +53,17 @@ Vagrant.configure(2) do |config|
     config.vm.provision :shell, :inline => "sudo chown -Rfv vagrant:vagrant /apps"
    end
 
+
+   config.vm.define :chef_node_1 do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.4"
+    vm_config.vm.hostname = "chef-node-1.capgemini.com"
+   end
+
+   config.vm.define :chef_node_2 do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.5"
+    vm_config.vm.hostname = "chef-node-2.capgemini.com"
+   end
+
    # add slave via launch command on slave
    # Step1: obtain slave jar: http://your-Jenkins-server:port/jnlpJars/slave.jar 
    # Step2: java -jar slave.jar -jnlpUrl http://Your-Jenkins-Server:port/computer/slave-name/slave-agent.jnlp
