@@ -11,6 +11,11 @@
 
 # execute 'apt-get update -y'
 
+include_recipe 'apt'
+
+
+# node['network']['interfaces']['enp0s8']['addresses']
+
 package 'nginx'
 
 service 'nginx' do
