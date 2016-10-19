@@ -11,8 +11,13 @@
 
 # execute 'apt-get update -y'
 
-include_recipe 'apt'
-
+# if node['platform_family']=='debian'
+#   include_recipe 'apt'
+# elsif node['platform_family']=='redhat'
+#   include_recipes 'yum'
+# else
+  
+# end
 
 # node['network']['interfaces']['enp0s8']['addresses']
 
@@ -27,40 +32,35 @@ end
 #   action :create
 # end
 
+# # Solution 1
+# if platform_family?('debian')
+# template "/var/www/html/index.nginx-debian.html" do
+#   source "index.html.erb"
+#   action :create
+# elsif platform_family?('centos')
+#   template "/var/www/html/index.html" do
+#     source "index.html.erb"
+#     action :create
+#   end
+# elsif platform_family?('windows')
+#   template 'c:\nginx\www\index.html' do
+#     source 'index.html.erb'
+#     action :create
+#   end
+# else
+#   template "/var/www/html/index.html" do
+#     source "index.html.erb"
+#     action :create
+#   end
+# end
 
-# Solution 1
-if platform_family?('debian')
-template "/var/www/html/index.nginx-debian.html" do
-  source "index.html.erb"
-  action :create
-elsif platform_family?('centos')
-  template "/var/www/html/index.html" do
-    source "index.html.erb"
-    action :create
-  end
-elsif platform_family?('windows')
-  template 'c:\nginx\www\index.html' do
-    source 'index.html.erb'
-    action :create
-  end
-else 
-  template "/var/www/html/index.html" do
-    source "index.html.erb"
-    action :create
-  end
-end
+# #solution 2
+# template node['webserver']['index_path']["node['platform_family']"] do
+#   source "index.html.erb"
+#   action :create
+# end
 
-
-#solution 2
-template node['webserver']['index_path']["node['platform_family']"] do
-  source "index.html.erb"
-  action :create
-end
-
-
-
-
-file "/var/www/html/file.html" do
+file '/var/www/html/file.html' do
   content 'random stuff'
   action :create
 end
