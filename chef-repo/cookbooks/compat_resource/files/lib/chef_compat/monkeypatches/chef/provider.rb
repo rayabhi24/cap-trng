@@ -2,7 +2,7 @@ require 'chef/provider'
 require 'chef/provider/lwrp_base'
 
 class Chef::Provider
-  if !defined?(InlineResources)
+  unless defined?(InlineResources)
     InlineResources = Chef::Provider::LWRPBase::InlineResources
   end
   module InlineResources
@@ -37,7 +37,6 @@ class Chef::Provider
   end
 end
 
-
 class Chef
   class Provider
     class LWRPBase < Provider
@@ -53,7 +52,7 @@ class Chef
             Chef::Runner.new(run_context).converge
             return_value
           ensure
-            if run_context.resource_collection.any? { |r| r.updated? }
+            if run_context.resource_collection.any?(&:updated?)
               new_resource.updated_by_last_action(true)
             end
             @run_context = old_run_context

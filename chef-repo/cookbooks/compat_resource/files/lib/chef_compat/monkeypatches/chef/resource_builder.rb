@@ -26,7 +26,7 @@
 
 # NOTE: this was extracted from the Recipe DSL mixin, relevant specs are in spec/unit/recipe_spec.rb
 
-if Gem::Requirement.new("< 12.10.24").satisfied_by?(Gem::Version.new(Chef::VERSION))
+if Gem::Requirement.new('< 12.10.24').satisfied_by?(Gem::Version.new(Chef::VERSION))
   begin
     require 'chef/resource_builder'
     # we use the LoadError this creates on early 12.x to not monkeypatch chef client versions that don't have Chef::ResourceBuilder
@@ -44,7 +44,7 @@ if Gem::Requirement.new("< 12.10.24").satisfied_by?(Gem::Version.new(Chef::VERSI
         attr_reader :enclosing_provider
         attr_reader :resource
 
-        # FIXME (ruby-2.1 syntax): most of these are mandatory
+        # FIXME: (ruby-2.1 syntax): most of these are mandatory
         def initialize(type:nil, name:nil, created_at: nil, params: nil, run_context: nil, cookbook_name: nil, recipe_name: nil, enclosing_provider: nil)
           @type               = type
           @name               = name
@@ -70,9 +70,7 @@ if Gem::Requirement.new("< 12.10.24").satisfied_by?(Gem::Version.new(Chef::VERSI
           # This behavior is very counter-intuitive and should be removed.
           # See CHEF-3694, https://tickets.opscode.com/browse/CHEF-3694
           # Moved to this location to resolve CHEF-5052, https://tickets.opscode.com/browse/CHEF-5052
-          if prior_resource
-            resource.load_from(prior_resource)
-          end
+          resource.load_from(prior_resource) if prior_resource
 
           resource.cookbook_name = cookbook_name
           resource.recipe_name = recipe_name
@@ -123,10 +121,10 @@ if Gem::Requirement.new("< 12.10.24").satisfied_by?(Gem::Version.new(Chef::VERSI
 
         # this is an equality test specific to checking for 3694 cloning warnings
         def identicalish_resources?(first, second)
-          skipped_ivars = [ :@source_line, :@cookbook_name, :@recipe_name, :@params, :@elapsed_time, :@declared_type ]
-          checked_ivars = ( first.instance_variables | second.instance_variables ) - skipped_ivars
+          skipped_ivars = [:@source_line, :@cookbook_name, :@recipe_name, :@params, :@elapsed_time, :@declared_type]
+          checked_ivars = (first.instance_variables | second.instance_variables) - skipped_ivars
           non_matching_ivars = checked_ivars.reject do |iv|
-            if iv == :@action && ( [first.instance_variable_get(iv)].flatten == [:nothing] || [second.instance_variable_get(iv)].flatten == [:nothing] )
+            if iv == :@action && ([first.instance_variable_get(iv)].flatten == [:nothing] || [second.instance_variable_get(iv)].flatten == [:nothing])
               # :nothing action on either side of the comparison always matches
               true
             else
@@ -156,7 +154,6 @@ if Gem::Requirement.new("< 12.10.24").satisfied_by?(Gem::Version.new(Chef::VERSI
               nil
             end
         end
-
       end
     end
   rescue LoadError

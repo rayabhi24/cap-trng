@@ -6,8 +6,8 @@ if Chef::VERSION.to_f >= 12.5 && Chef::VERSION.to_f <= 12.8
     class Property
       # 12.9 introduced a new optional parameter to `get()` to avoid a nil-set warning.
       # When their method gets called with 2 args, we need to ignore and call with 1.
-      alias_method :_original_get, :get
-      def get(resource, *args)
+      alias _original_get get
+      def get(resource, *_args)
         _original_get(resource)
       end
     end

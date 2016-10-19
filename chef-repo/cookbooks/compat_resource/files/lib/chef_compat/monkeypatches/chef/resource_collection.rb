@@ -17,10 +17,10 @@
 # limitations under the License.
 #
 
-require "chef/resource_collection/resource_set"
-require "chef/resource_collection/resource_list"
-require "chef/resource_collection"
-require "chef/exceptions"
+require 'chef/resource_collection/resource_set'
+require 'chef/resource_collection/resource_list'
+require 'chef/resource_collection'
+require 'chef/exceptions'
 
 module ChefCompat
   module Monkeypatches
@@ -91,7 +91,6 @@ module ChefCompat
     end
   end
 end
-
 
 class Chef::ResourceCollection
   unless method_defined?(:lookup_local)

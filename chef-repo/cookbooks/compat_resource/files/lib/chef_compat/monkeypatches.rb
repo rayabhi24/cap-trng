@@ -21,7 +21,7 @@ require 'chef_compat/monkeypatches/chef/node'
 require 'chef_compat/monkeypatches/chef/mixin/params_validate'
 require 'chef_compat/monkeypatches/chef/property'
 require 'chef_compat/monkeypatches/chef/provider'
-require 'chef_compat/monkeypatches/chef/recipe'  # copied from chef
+require 'chef_compat/monkeypatches/chef/recipe' # copied from chef
 require 'chef_compat/monkeypatches/chef/recipe_hook'
 require 'chef_compat/monkeypatches/chef/resource'
 require 'chef_compat/monkeypatches/chef/resource_builder'
@@ -29,8 +29,8 @@ require 'chef_compat/monkeypatches/chef/resource/lwrp_base'
 require 'chef_compat/monkeypatches/chef/resource_collection'
 require 'chef_compat/monkeypatches/chef/resource_collection/resource_list'
 require 'chef_compat/monkeypatches/chef/resource_collection/resource_set'
-require 'chef_compat/monkeypatches/chef/run_context'  # copied from chef
-require 'chef_compat/monkeypatches/chef/runner'  # copied from chef
+require 'chef_compat/monkeypatches/chef/run_context' # copied from chef
+require 'chef_compat/monkeypatches/chef/runner' # copied from chef
 
 # fix for Chef::RunContext instance that has already been created
 ObjectSpace.each_object(Chef::RunContext) do |run_context|

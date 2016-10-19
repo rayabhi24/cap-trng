@@ -16,8 +16,8 @@
 # limitations under the License.
 #
 
-require "chef/resource_collection/resource_list"
-require "chef/exceptions"
+require 'chef/resource_collection/resource_list'
+require 'chef/exceptions'
 
 module ChefCompat
   module Monkeypatches
@@ -26,7 +26,7 @@ module ChefCompat
         module ResourceSet
           module DeleteResource
             def delete(key)
-              raise ArgumentError, "Must pass a Chef::Resource or String to delete" unless key.is_a?(String) || key.is_a?(Chef::Resource)
+              raise ArgumentError, 'Must pass a Chef::Resource or String to delete' unless key.is_a?(String) || key.is_a?(Chef::Resource)
               key = key.to_s
               res = @resources_by_key.delete(key)
 
