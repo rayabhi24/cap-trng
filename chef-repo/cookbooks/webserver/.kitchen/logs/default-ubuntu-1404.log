@@ -1,0 +1,9 @@
+I, [2016-10-18T16:06:22.252932 #86093]  INFO -- default-ubuntu-1404: -----> Creating <default-ubuntu-1404>...
+I, [2016-10-18T16:06:23.819913 #86093]  INFO -- default-ubuntu-1404: Bringing machine 'default' up with 'virtualbox' provider...
+I, [2016-10-18T16:06:23.946224 #86093]  INFO -- default-ubuntu-1404: ==> default: Box 'bento/ubuntu-14.04' could not be found. Attempting to find and install...
+I, [2016-10-18T16:06:23.946317 #86093]  INFO -- default-ubuntu-1404:     default: Box Provider: virtualbox
+I, [2016-10-18T16:06:23.946500 #86093]  INFO -- default-ubuntu-1404:     default: Box Version: >= 0
+I, [2016-10-18T16:06:29.727681 #86093]  INFO -- default-ubuntu-1404: ==> default: Loading metadata for box 'bento/ubuntu-14.04'
+I, [2016-10-18T16:06:29.728197 #86093]  INFO -- default-ubuntu-1404:     default: URL: https://atlas.hashicorp.com/bento/ubuntu-14.04
+I, [2016-10-18T16:06:33.697182 #86093]  INFO -- default-ubuntu-1404: ==> default: Adding box 'bento/ubuntu-14.04' (v2.3.0) for provider: virtualbox
+I, [2016-10-18T16:06:33.700199 #86093]  INFO -- default-ubuntu-1404:     default: Downloading: https://atlas.hashicorp.com/bento/boxes/ubuntu-14.04/versions/2.3.0/providers/virtualbox.box

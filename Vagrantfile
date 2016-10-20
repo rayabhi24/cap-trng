@@ -13,11 +13,17 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
 
+  # if Vagrant.has_plugin?("vagrant-proxyconf")
+  #   config.proxy.http     = "http://172.21.4.10:3128/"
+  #   config.proxy.https    = "http://172.21.4.10:3128/"
+  #   config.proxy.no_proxy = "localhost,127.0.0.1"
+  # end
+
   config.vm.box = "chef_dev"
 
   config.vm.provision :shell, :inline => "sudo apt-get update -y"
 
-  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp -y"
+  config.vm.provision :shell, :inline => "sudo apt-get install vim ntp git daemon maven -y"
 
   config.vm.provision :shell, :inline => "sudo service ntp restart"
 
@@ -35,8 +41,39 @@ Vagrant.configure(2) do |config|
    # end
 
    config.vm.define :jenkins_master do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.2"
     vm_config.vm.hostname = "jenkins-master.capgemini.com"
-    # vm_config.vm.network "forwarded_port", guest: 8140, host: 8140
+    vm_config.vm.network "forwarded_port", guest: 8080, host: 8080
    end
 
+   config.vm.define :jenkins_slave_01 do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.3"
+    vm_config.vm.hostname = "jenkins-slave.capgemini.com"
+    config.vm.provision :shell, :inline => "sudo mkdir -p /apps"
+    config.vm.provision :shell, :inline => "sudo chown -Rfv vagrant:vagrant /apps"
+   end
+
+
+   config.vm.define :chef_node_1 do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.4"
+    vm_config.vm.hostname = "chef-node-1.capgemini.com"
+   end
+
+   config.vm.define :chef_node_2 do |vm_config|
+    vm_config.vm.network "private_network", ip: "33.33.32.5"
+    vm_config.vm.hostname = "chef-node-2.capgemini.com"
+   end
+
+   # add slave via launch command on slave
+   # Step1: obtain slave jar: http://your-Jenkins-server:port/jnlpJars/slave.jar 
+   # Step2: java -jar slave.jar -jnlpUrl http://Your-Jenkins-Server:port/computer/slave-name/slave-agent.jnlp
+
+   # Build maven app
+   # Repository: https://github.com/mohitsethi/maven-sample-app
+   # Build Steps
+   # - $ mvn clean install
+
+   # Jenkins dsl
+   # Plugin Home: https://wiki.jenkins-ci.org/display/JENKINS/Job+DSL+Plugin
+   # 
 end
